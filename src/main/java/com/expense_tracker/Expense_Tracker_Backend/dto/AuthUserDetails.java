@@ -6,9 +6,32 @@ public class AuthUserDetails {
     private String username;
     private String email;
     private String token;
+    private String fullname;
 
     public String getUid() {
         return uid;
+    }
+
+    public AuthUserDetails() {
+    }
+
+    @Override
+    public String toString() {
+        return "AuthUserDetails{" +
+                "uid='" + uid + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", token='" + token + '\'' +
+                ", fullname='" + fullname + '\'' +
+                '}';
+    }
+
+    public AuthUserDetails(String uid, String username, String email, String token, String fullname) {
+        this.uid = uid;
+        this.username = username;
+        this.email = email;
+        this.token = token;
+        this.fullname = fullname;
     }
 
     public void setUid(String uid) {
@@ -39,23 +62,11 @@ public class AuthUserDetails {
         this.token = token;
     }
 
-    @Override
-    public String toString() {
-        return "AuthUserDetails{" +
-                "uid='" + uid + '\'' +
-                ", username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", token='" + token + '\'' +
-                '}';
+    public String getFullname() {
+        return fullname;
     }
 
-    public AuthUserDetails(String uid, String username, String email, String token) {
-        this.uid = uid;
-        this.username = username;
-        this.email = email;
-        this.token = token;
-    }
-
-    public AuthUserDetails() {
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 }
