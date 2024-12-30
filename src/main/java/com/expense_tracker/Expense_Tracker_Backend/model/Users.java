@@ -1,6 +1,5 @@
 package com.expense_tracker.Expense_Tracker_Backend.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -9,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @NoArgsConstructor
 @Document
-public class UserDetails {
+public class Users {
 
     @Id
     private String uid;
@@ -35,10 +34,10 @@ public class UserDetails {
                 '}';
     }
 
-    public UserDetails() {
+    public Users() {
     }
 
-    public UserDetails(String uid, String username, String password, String email) {
+    public Users(String uid, String username, String password, String email) {
         this.uid = uid;
         this.username = username;
         this.password = password;
