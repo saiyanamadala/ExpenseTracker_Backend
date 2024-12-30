@@ -1,5 +1,6 @@
 package com.expense_tracker.Expense_Tracker_Backend.service;
 
+import com.expense_tracker.Expense_Tracker_Backend.dto.AuthUserDetails;
 import com.expense_tracker.Expense_Tracker_Backend.model.Users;
 import com.expense_tracker.Expense_Tracker_Backend.repository.UserDetailsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,12 +40,20 @@ public class UserService {
         return new ResponseEntity<>(userDetailsRepo.findAll(),HttpStatus.OK);
     }
 
-    public ResponseEntity<String> verify(Users user) {
+    public ResponseEntity<AuthUserDetails> verify(Users user) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword()));
 
-        if(authentication.isAuthenticated())
-            return new ResponseEntity<>(jwtService.generateToken(user.getUsername()),HttpStatus.OK);
+        if(authentication.isAuthenticated()) {
+            String token = jwtService.generateToken(user.getUsername());
+            Users authUser = userDetailsRepo.findByUsername(user.getUsername());
+            AuthUserDetails authUserDetails = new AuthUserDetails();
+            authUserDetails.setToken(token);
+            authUserDetails.setUid(authUser.getUid());
+            authUserDetails.setEmail(authUser.getEmail());
+            authUserDetails.setUsername(authUser.getUsername());
+            return new ResponseEntity<>(authUserDetails, HttpStatus.OK);
+        }
 
-        return new ResponseEntity<>("fail",HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(null,HttpStatus.UNAUTHORIZED);
     }
 }

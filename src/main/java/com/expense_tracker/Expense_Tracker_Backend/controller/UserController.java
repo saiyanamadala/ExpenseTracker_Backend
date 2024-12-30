@@ -1,5 +1,6 @@
 package com.expense_tracker.Expense_Tracker_Backend.controller;
 
+import com.expense_tracker.Expense_Tracker_Backend.dto.AuthUserDetails;
 import com.expense_tracker.Expense_Tracker_Backend.model.Users;
 import com.expense_tracker.Expense_Tracker_Backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> userLogin(@RequestBody Users user){
-        System.out.println(user);
-        System.out.println(user.getUsername());
+    public ResponseEntity<AuthUserDetails> userLogin(@RequestBody Users user){
         return userService.verify(user);
     }
 }
