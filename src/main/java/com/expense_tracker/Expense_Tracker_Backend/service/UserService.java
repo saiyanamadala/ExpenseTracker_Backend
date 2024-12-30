@@ -51,6 +51,7 @@ public class UserService {
             authUserDetails.setUid(authUser.getUid());
             authUserDetails.setEmail(authUser.getEmail());
             authUserDetails.setUsername(authUser.getUsername());
+            authUserDetails.setFullname(authUser.getFullname());
             return new ResponseEntity<>(authUserDetails, HttpStatus.OK);
         }
 
