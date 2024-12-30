@@ -10,10 +10,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
 @Service
+@CrossOrigin(origins = "http://192.168.1.12:5173")
 public class UserService {
 
     @Autowired
@@ -27,10 +29,10 @@ public class UserService {
 
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
 
-    public ResponseEntity<Users> register(Users user) {
+    public ResponseEntity<String> register(Users user) {
         user.setPassword(encoder.encode(user.getPassword()));
-        Users savedUser = userDetailsRepo.save(user);
-        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+        userDetailsRepo.save(user);
+        return new ResponseEntity<>("Success", HttpStatus.CREATED);
     }
 
     public ResponseEntity<List<Users>> allUsers() {
