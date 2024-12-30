@@ -15,7 +15,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<Users> register(@RequestBody Users user){
+    public ResponseEntity<String> register(@RequestBody Users user){
         return userService.register(user);
     }
 
@@ -26,6 +26,8 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<String> userLogin(@RequestBody Users user){
+        System.out.println(user);
+        System.out.println(user.getUsername());
         return userService.verify(user);
     }
 }
