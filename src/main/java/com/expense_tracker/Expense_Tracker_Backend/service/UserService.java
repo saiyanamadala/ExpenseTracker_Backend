@@ -32,8 +32,14 @@ public class UserService {
 
     public ResponseEntity<String> register(Users user) {
         user.setPassword(encoder.encode(user.getPassword()));
-        userDetailsRepo.save(user);
-        return new ResponseEntity<>("Success", HttpStatus.CREATED);
+        if(userDetailsRepo.findByUsername(user.getUsername())==null) {
+            userDetailsRepo.save(user);
+            return new ResponseEntity<>("Success", HttpStatus.CREATED);
+        }
+        else{
+            return new ResponseEntity<>("Username not unique", HttpStatus.BAD_REQUEST);
+        }
+
     }
 
     public ResponseEntity<List<Users>> allUsers() {
