@@ -3,6 +3,7 @@ package com.expense_tracker.Expense_Tracker_Backend.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
@@ -12,6 +13,7 @@ public class Users {
 
     @Id
     private String uid;
+    @Indexed(unique = true)
     private String username;
     private String password;
     private String email;
