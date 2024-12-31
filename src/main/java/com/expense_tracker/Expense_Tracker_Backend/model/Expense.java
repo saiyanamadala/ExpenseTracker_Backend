@@ -17,9 +17,18 @@ public class Expense {
     private String paymentMethod;
     private String category;
     private Date date;
+    private float amount;
 
     public String getUid() {
         return uid;
+    }
+
+    public float getAmount() {
+        return amount;
+    }
+
+    public void setAmount(float amount) {
+        this.amount = amount;
     }
 
     public void setUid(String uid) {
@@ -66,6 +75,16 @@ public class Expense {
         this.date = date;
     }
 
+    public Expense(UUID id, String uid, String title, String paymentMethod, String category, Date date, float amount) {
+        this.id = id;
+        this.uid = uid;
+        this.title = title;
+        this.paymentMethod = paymentMethod;
+        this.category = category;
+        this.date = date;
+        this.amount = amount;
+    }
+
     @Override
     public String toString() {
         return "Expense{" +
@@ -75,16 +94,8 @@ public class Expense {
                 ", paymentMethod='" + paymentMethod + '\'' +
                 ", category='" + category + '\'' +
                 ", date=" + date +
+                ", amount=" + amount +
                 '}';
-    }
-
-    public Expense(UUID id, String uid, String title, String paymentMethod, String category, Date date) {
-        this.id = id;
-        this.uid = uid;
-        this.title = title;
-        this.paymentMethod = paymentMethod;
-        this.category = category;
-        this.date = date;
     }
 
     public Expense() {
