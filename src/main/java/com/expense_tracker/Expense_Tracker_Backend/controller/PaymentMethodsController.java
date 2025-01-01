@@ -17,12 +17,11 @@ public class PaymentMethodsController {
 
     @PostMapping("/add")
     public ResponseEntity<String> addPaymentMethod(@RequestBody PaymentMethods paymentMethod){
-        System.out.println(paymentMethod);
         return paymentMethodsService.addPaymentMethod(paymentMethod);
     }
 
     @GetMapping("/{uid}/all")
-    public ResponseEntity<List<PaymentMethods>> allPaymentMethods(@PathVariable String uid){
+    public ResponseEntity<List<String>> allPaymentMethods(@PathVariable String uid){
         return paymentMethodsService.allPaymentMethods(uid);
     }
 }
