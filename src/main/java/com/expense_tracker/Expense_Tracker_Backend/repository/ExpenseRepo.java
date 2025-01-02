@@ -4,6 +4,7 @@ import com.expense_tracker.Expense_Tracker_Backend.model.Expense;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,4 +23,7 @@ public interface ExpenseRepo extends MongoRepository<Expense, UUID> {
     List<Expense> findByUidAndCategory(String uid, String category);
     
     List<Expense> findByUidAndPaymentMethod(String uid, String paymentMethod);
+
+    @Query("{ 'uid': ?0, 'date': { $gte: ?1, $lte: ?2 } }")
+    List<Expense> findByUidAndDateBetween(String uid, Date startDate, Date endDate);
 }

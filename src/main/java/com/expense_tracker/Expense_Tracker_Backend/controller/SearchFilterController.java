@@ -3,10 +3,14 @@ package com.expense_tracker.Expense_Tracker_Backend.controller;
 import com.expense_tracker.Expense_Tracker_Backend.model.Expense;
 import com.expense_tracker.Expense_Tracker_Backend.service.SearchFilterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/search-filter")
@@ -38,5 +42,15 @@ public class SearchFilterController {
     @GetMapping("/paymentMethod")
     public ResponseEntity<List<Expense>> getExpensesByPaymentMethod(@RequestParam String uid,@RequestParam String paymentMethod){
         return searchFilterService.getExpenseBypaymentMethod(uid,paymentMethod);
+    }
+
+    @GetMapping("/dates-filter")
+    public ResponseEntity<List<Expense>> getExpensesBetweenDates(@RequestParam String uid, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate){
+        return searchFilterService.getExpensesBetweenDates(uid,startDate,endDate);
+    }
+
+    @GetMapping("/analyze")
+    public ResponseEntity<Map<String, HashMap<String, Float>>> getSpendAnalysis(@RequestParam String uid, @RequestParam int noMonths){
+        return searchFilterService.getSpendAnalysis(uid,noMonths);
     }
 }
