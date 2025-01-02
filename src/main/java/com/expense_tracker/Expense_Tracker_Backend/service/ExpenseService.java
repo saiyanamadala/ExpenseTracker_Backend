@@ -2,6 +2,7 @@ package com.expense_tracker.Expense_Tracker_Backend.service;
 
 import com.expense_tracker.Expense_Tracker_Backend.model.Expense;
 import com.expense_tracker.Expense_Tracker_Backend.repository.ExpenseRepo;
+import org.apache.commons.text.WordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,8 @@ public class ExpenseService {
     private ExpenseRepo expenseRepo;
 
     public ResponseEntity<String> addExpense(Expense expense) {
+        expense.setTitle(WordUtils.capitalizeFully(expense.getTitle()));
+        expense.setCategory(WordUtils.capitalizeFully(expense.getCategory()));
         expenseRepo.save(expense);
         return new ResponseEntity<>("Success", HttpStatus.OK);
     }
