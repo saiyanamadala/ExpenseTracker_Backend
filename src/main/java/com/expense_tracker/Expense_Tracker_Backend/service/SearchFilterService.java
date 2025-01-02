@@ -64,9 +64,6 @@ public class SearchFilterService {
         calendar.add(Calendar.MONTH, -noMonths);
         Date startDate = calendar.getTime();
 
-        System.out.println(startDate);
-        System.out.println(currentDate);
-
         List<Expense> expenses = expenseRepo.findByUidAndDateBetween(uid,startDate,currentDate);
 
         //List<String> paymentMethods = paymentMethodsService.allPaymentMethods(uid).getBody();
