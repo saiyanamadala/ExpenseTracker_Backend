@@ -28,7 +28,6 @@ public class ExpenseService {
 
     public ResponseEntity<List<Expense>> allExpensesById(String uid) {
         try{
-
             return new ResponseEntity<>(expenseRepo.findAllByUid(uid),HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new ArrayList<>(),HttpStatus.BAD_REQUEST);
@@ -54,9 +53,9 @@ public class ExpenseService {
             Expense storedExpense = expenseStored.get();
             storedExpense.setAmount(expense.getAmount());
             storedExpense.setDate(expense.getDate());
-            storedExpense.setCategory(expense.getCategory());
-            storedExpense.setPaymentMethod(expense.getPaymentMethod());
-            storedExpense.setTitle(expense.getTitle());
+            storedExpense.setCategory(WordUtils.capitalizeFully(expense.getCategory()));
+            storedExpense.setPaymentMethod(WordUtils.capitalizeFully(expense.getPaymentMethod()));
+            storedExpense.setTitle(WordUtils.capitalizeFully(expense.getTitle()));
 
             Expense updatedExpense = expenseRepo.save(storedExpense);
             return new ResponseEntity<>(updatedExpense,HttpStatus.OK);
